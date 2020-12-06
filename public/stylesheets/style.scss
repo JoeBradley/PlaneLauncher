@@ -1,0 +1,30 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a{
+  color: #00B7FF;
+  text-decoration: none;
+}
+
+h1{
+  font-size: 2em;
+  color: aquamarine;
+  font-weight: bold;
+}
+
+.form-control {
+  margin: 10px 0;
+}
+
+button {
+  background-color: aquamarine;
+  color: white;
+  padding: 5px 10px;
+  font-size: 1.4em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+textarea { border-radius: 4px; padding: 5px 10px; border-color: aquamarine; }

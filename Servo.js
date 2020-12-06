@@ -1,9 +1,9 @@
-const Gpio = process.env.NODE_ENV !== "production" ?
+const Gpio = process.env.NODE_ENV.trim() !== "production" ?
     require("pigpio-mock").Gpio :
     require("pigpio").Gpio;
 
-const servoPulseWidthMax = 2000;
-const servoPulseWidthMin = 500;
+    const servoPulseWidthMin = 550;
+    const servoPulseWidthMax = 2300;
 const servoMinAngle = -90;
 const servoMaxAngle = 90;
 
@@ -21,7 +21,8 @@ class Servo {
     rotate(angle) {
         const pulseWidth = this.calculatePulseWidth(angle, this.minAngle, this.maxAngle);
 
-        console.log('Set servo pulseWidth', { pulseWidth });
+        console.log('Set servo pulseWidth', { angle, pulseWidth });
+
         this.motor.servoWrite(pulseWidth);
     };
 

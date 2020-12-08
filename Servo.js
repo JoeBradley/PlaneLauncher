@@ -7,6 +7,9 @@ const Gpio = process.env.NODE_ENV.trim() !== "production" ?
 const servoMinAngle = -90;
 const servoMaxAngle = 90;
 
+/**
+ * ref: https://components101.com/servo-motor-basics-pinout-datasheet
+ */
 class Servo {
     constructor(pin, minAngle, maxAngle) {
         this.motor = new Gpio(pin, { mode: Gpio.OUTPUT });

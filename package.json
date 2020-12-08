@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "export NODE_ENV=production && node ./bin/www",
+    "start": "export PORT=80 && export NODE_ENV=production && node ./bin/www",
     "watch": "nodemon ./bin/www"
   },
   "dependencies": {

@@ -3,6 +3,10 @@
 <head>
   <title>Plane Launcher</title>
   <link rel="stylesheet" href="/stylesheets/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" 
+      type="image/png" 
+      href="./images/paper_plane.png">
 </head>
 
 <body>
@@ -16,15 +20,9 @@
   <div class="form-control">
     <button id="send">Send</button>
   </div>
-  
+
   <div class="form-control">
-    <button id="launch">Launch</button>
-  </div>
-  
-  <div class="form-control">
-    <label>Speed</label>
-    <input id="speed" oninput="speedValue.value = speed.value" type="range" min="0" max="100" value="0"></input>
-    <output id="speedValue">0</output>
+    <textarea id="logs" rows="4" cols="80" disabled></textarea>
   </div>
 
   <div class="form-control">
@@ -40,9 +38,14 @@
     <output id="horizontalValue">0</output>
   </div>
 
+  <div class="form-control">
+    <label>Speed</label>
+    <input id="speed" oninput="speedValue.value = speed.value" type="range" min="0" max="100" value="0"></input>
+    <output id="speedValue">0</output>
+  </div>
 
   <div class="form-control">
-    <textarea id="logs" rows="4" cols="80" disabled></textarea>
+    <button id="launch">Launch</button>
   </div>
 
   <script src="/socket.io/socket.io.js"></script>

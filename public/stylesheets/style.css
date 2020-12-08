@@ -1,18 +1,22 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
 
 a {
-  color: #00B7FF;
-  text-decoration: none; }
+  color: aquamarine;
+  text-decoration: none;
+}
 
 h1 {
   font-size: 2em;
   color: aquamarine;
-  font-weight: bold; }
+  font-weight: bold;
+}
 
 .form-control {
-  margin: 10px 0; }
+  margin: 10px 0;
+}
 
 button {
   background-color: aquamarine;
@@ -21,11 +25,29 @@ button {
   font-size: 1.4em;
   border: none;
   border-radius: 4px;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 textarea {
   border-radius: 4px;
   padding: 5px 10px;
-  border-color: aquamarine; }
+  border-color: aquamarine;
+  max-width: 100%;
+}
 
+input {
+  max-width: 100%;
+}
+
+@media only screen and (max-width: 640px) {
+  * {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  textarea,
+  input {
+    width: 100%;
+    margin: 0 10px;
+  }
+}
 /*# sourceMappingURL=style.css.map */

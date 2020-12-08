@@ -3,12 +3,12 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a{
-  color: #00B7FF;
+a {
+  color: aquamarine;
   text-decoration: none;
 }
 
-h1{
+h1 {
   font-size: 2em;
   color: aquamarine;
   font-weight: bold;
@@ -27,4 +27,26 @@ button {
   border-radius: 4px;
   cursor: pointer;
 }
-textarea { border-radius: 4px; padding: 5px 10px; border-color: aquamarine; }
+
+textarea {
+  border-radius: 4px;
+  padding: 5px 10px;
+  border-color: aquamarine;
+  max-width: 100%;
+}
+
+input {
+  max-width: 100%;
+}
+
+@media only screen and (max-width: 640px) {
+  * {
+    box-sizing: border-box;
+  }
+
+  textarea,
+  input {
+    width: 100%;
+    margin: 0 10px;
+  }
+}

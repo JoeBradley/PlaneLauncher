@@ -2,50 +2,76 @@
 
 <head>
   <title>Plane Launcher</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" 
-      type="image/png" 
-      href="./images/paper_plane.png">
+  <meta name="theme-color" content="#50ba97" />
+  <link rel="icon" type="image/png" href="./images/paper_plane.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
   <h1>Plane Launcher</h1>
   <p>Control the plane launcher fom anywhere</p>
 
-  <div class="form-control">
-    <textarea id="msg" rows="4" cols="80"></textarea>
-  </div>
-  
-  <div class="form-control">
-    <button id="send">Send</button>
-  </div>
+  <div class="container">
 
-  <div class="form-control">
-    <textarea id="logs" rows="4" cols="80" disabled></textarea>
-  </div>
+    <section>
+      <h2>Launchpad orientation</h2>
 
-  <div class="form-control">
-    <label>Vertical</label>
-    <input id="vertical" oninput="verticalValue.value = vertical.value" type="range" min="0" max="90" value="0"     
-    orientation="vertical" aria-orientation="vertical"></input>
-    <output id="verticalValue">0</output>
-  </div>
+      <div class="form-control">
+        <label>Vertical</label>
+        <div class="form-control-inline">
+          <input id="vertical" oninput="verticalValue.value = vertical.value" type="range" min="0" max="90" value="0"
+            orientation="vertical" aria-orientation="vertical"></input>
+          <output id="verticalValue">0</output>
+        </div>
+      </div>
 
-  <div class="form-control">
-    <label>Horizontal</label>
-    <input id="horizontal" oninput="horizontalValue.value = horizontal.value" type="range" min="-90" max="90" value="0" aria-orientation="horizontal"></input>
-    <output id="horizontalValue">0</output>
-  </div>
+      <div class="form-control">
+        <label>Horizontal</label>
+        <div class="form-control-inline">
+          <input id="horizontal" oninput="horizontalValue.value = horizontal.value" type="range" min="-90" max="90"
+            value="0" aria-orientation="horizontal"></input>
+          <output id="horizontalValue">0</output>
+        </div>
+      </div>
 
-  <div class="form-control">
-    <label>Speed</label>
-    <input id="speed" oninput="speedValue.value = speed.value" type="range" min="0" max="100" value="0"></input>
-    <output id="speedValue">0</output>
-  </div>
+      <h2>Takeoff velocity</h2>
 
-  <div class="form-control">
-    <button id="launch">Launch</button>
+      <div class="form-control">
+        <label>Speed</label>
+        <div class="form-control-inline">
+          <input id="speed" oninput="speedValue.value = speed.value" type="range" min="0" max="100" value="0"></input>
+          <output id="speedValue">0</output>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <button id="launch">Launch</button>
+      </div>
+    </section>
+
+    <section>
+
+      <h2>Control tower communications</h2>
+
+      <div class="form-control">
+        <label>Pilot Name</label>
+        <input id="pilot" type="text" value="Pilot"></textarea>
+      </div>
+
+      <div class="form-control">
+        <textarea id="msg" rows="4"></textarea>
+      </div>
+
+      <div class="form-control">
+        <button id="send">Send</button>
+      </div>
+
+      <div class="form-control">
+        <textarea id="logs" rows="4" disabled></textarea>
+      </div>
+    </section>
   </div>
 
   <script src="/socket.io/socket.io.js"></script>

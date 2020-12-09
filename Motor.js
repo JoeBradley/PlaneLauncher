@@ -108,7 +108,7 @@ class Motor {
             let hdlr = setInterval(() => {
 
                 if (this.enablePin.getPwmDutyCycle() >= dutyCycle - 20 && this.enablePin.getPwmDutyCycle() <= dutyCycle + 20) {
-                    console.log('Speed reached', { speed: this.speed, target: dutyCycle, current: this.enablePin.getPwmDutyCycle() });
+                    console.log('Speed set', { speed: this.speed, target: dutyCycle, current: this.enablePin.getPwmDutyCycle() });
 
                     clearInterval(hdlr);
                     resolve();

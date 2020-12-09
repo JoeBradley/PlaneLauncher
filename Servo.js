@@ -39,6 +39,7 @@ class Servo {
             let hdlr = setInterval(() => { 
                 if (this.motor.getServoPulseWidth() >= pulseWidth - 20 &&  this.motor.getServoPulseWidth() <= pulseWidth + 20){
                     clearInterval(hdlr);
+                    console.log('Servo pulseWidth set', { angle, pulseWidth });
                     resolve();
                 }
             }, 50); 
@@ -60,6 +61,7 @@ class Servo {
             let hdlr = setInterval(() => { 
                 if (this.motor.getServoPulseWidth() >= pulseWidth - 20 &&  this.motor.getServoPulseWidth() <= pulseWidth + 20){
                     clearInterval(hdlr);
+                    console.log('Servo pulseWidth set', { angle, pulseWidth });
                     resolve();
                 }
             }, 50); 

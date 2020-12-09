@@ -2,8 +2,8 @@ const Gpio = process.env.NODE_ENV.trim() !== "production" ?
     require("pigpio-mock").Gpio :
     require("pigpio").Gpio;
 
-    const servoPulseWidthMin = 550;
-    const servoPulseWidthMax = 2300;
+const servoPulseWidthMin = 550;
+const servoPulseWidthMax = 2300;
 const servoMinAngle = -90;
 const servoMaxAngle = 90;
 
@@ -11,6 +11,12 @@ const servoMaxAngle = 90;
  * ref: https://components101.com/servo-motor-basics-pinout-datasheet
  */
 class Servo {
+    /**
+     * Create new Servo.  Min/Max angle must be in range of Servo Min/Max range.
+     * @param {number} pin GPIO pin number 
+     * @param {*} minAngle min angle of servo (>= servoMinAngle)
+     * @param {*} maxAngle max angle of servo (=< servoMaxAngle)
+     */
     constructor(pin, minAngle, maxAngle) {
         this.motor = new Gpio(pin, { mode: Gpio.OUTPUT });
         this.minAngle = minAngle;
@@ -28,6 +34,15 @@ class Servo {
 
         this.motor.servoWrite(pulseWidth);
     };
+
+    /**
+     * Swicth Servo off (pulse width = 0)
+     */
+    off() {
+        console.log('Set servo pulseWidth', { pulseWidth: 0 });
+
+        this.motor.servoWrite(0);
+    }
 
     /**
      * Calcuate the pulse with for the given angle

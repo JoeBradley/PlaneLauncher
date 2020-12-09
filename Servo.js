@@ -28,44 +28,22 @@ class Servo {
      * @param {number} angle [-90,90]
      */
     async rotateAsync(angle) {
-        return new Promise(resolve => { 
-            const pulseWidth = this.calculatePulseWidth(angle, this.minAngle, this.maxAngle);
+        const pulseWidth = this.calculatePulseWidth(angle, this.minAngle, this.maxAngle);
 
-            console.log('Set servo pulseWidth', { angle, pulseWidth });
-    
-            this.motor.servoWrite(pulseWidth);   
+        console.log('Rotate servo', { angle, pulseWidth });
 
-            // Resolve once motor pulse width is near target (+/- 20)
-            let hdlr = setInterval(() => { 
-                if (this.motor.getServoPulseWidth() >= pulseWidth - 20 &&  this.motor.getServoPulseWidth() <= pulseWidth + 20){
-                    clearInterval(hdlr);
-                    console.log('Servo pulseWidth set', { angle, pulseWidth });
-                    resolve();
-                }
-            }, 50); 
-        });
+        await this.setServoPulseWidthAsync(pulseWidth);
     };
 
     /**
      * Switch Servo off (pulse width = 0)
      */
     async offAsync() {
-        return new Promise(resolve => { 
-            const pulseWidth = 0;
-            
-            console.log('Set servo pulseWidth', { pulseWidth });
-    
-            this.motor.servoWrite(pulseWidth);   
-            
-            // Resolve once motor pulse width is near target (+/- 20)
-            let hdlr = setInterval(() => { 
-                if (this.motor.getServoPulseWidth() >= pulseWidth - 20 &&  this.motor.getServoPulseWidth() <= pulseWidth + 20){
-                    clearInterval(hdlr);
-                    console.log('Servo pulseWidth set', { angle, pulseWidth });
-                    resolve();
-                }
-            }, 50); 
-        });
+        const pulseWidth = 0;
+
+        console.log('Set servo pulse width', { pulseWidth });
+
+        await this.setServoPulseWidthAsync(pulseWidth);
     }
 
     /**
@@ -92,6 +70,29 @@ class Servo {
 
         return pw;
     }
+
+    async setServoPulseWidthAsync(pulseWidth) {
+        return new Promise(resolve => {
+            this.motor.servoWrite(pulseWidth);
+
+            // Resolve once motor pulse width is near target (+/- 20)
+            const intTimespan = 50;
+            const maxWait = 250;
+            let waited = 0;
+
+            let hdlr = setInterval(() => {
+                waited += intTimespan;
+
+                if (waited >= maxWait ||
+                    (this.motor.getServoPulseWidth() >= pulseWidth - 20 &&
+                        this.motor.getServoPulseWidth() <= pulseWidth + 20)) {
+                    clearInterval(hdlr);
+                    console.log('Servo pulse width set', { pulseWidth });
+                    resolve();
+                }
+            }, intTimespan);
+        });
+    };
 }
 
 module.exports = Servo;

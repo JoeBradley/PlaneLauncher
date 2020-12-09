@@ -1,4 +1,4 @@
-const Gpio = process.env.NODE_ENV.trim() !== "production" ?
+const Gpio = process.env.NODE_ENV !== "production" ?
     require("pigpio-mock").Gpio :
     require("pigpio").Gpio;
 

@@ -13,44 +13,73 @@ class PiController {
     constructor() {
         this.horizontalServo = new Servo(17, -90, 90);
         this.verticalServo = new Servo(27, 0, 90);
+        this.catapultServo = new Servo(22, 0, 30);
 
-        // this.leftMotor = new Motor.Motor(0, 0, 0, false);
-        // this.rightMotor = new Motor.Motor(0, 0, 0, true);
+        // this.leftMotor = new Motor.Motor(14, 15, 18, false);
+        // this.rightMotor = new Motor.Motor(16, 20, 21, true);
+
+        //function to run when user closes using ctrl+c
+        process.on('SIGINT', async () => {
+            await this.horizontalServo.offAsync();
+            await this.verticalServo.offAsync();
+            await this.catapultServo.offAsync();
+            // await this.leftMotor.offAsync();
+            // await this.rightMotor.offAsync();
+        });
     }
 
     /**
      * Rotate horizontal servo
      * @param {number} angle - angle to rotate [-90,90]
      */
-    rotateHorizontal(angle) {
-        this.horizontalServo.rotate(angle);
+    async rotateHorizontalAsync(angle) {
+        await this.horizontalServo.rotateAsync(angle);
     };
 
     /**
      * Rotate vertical servo
      * @param {number} angle - angle to rotate [0,90]
      */
-    rotateVertical(angle) {
-        this.verticalServo.rotate(angle);
+    async rotateVerticalAsync(angle) {
+        await this.verticalServo.rotateAsync(angle);
     }
 
     /**
      * Launch the plane. Start both motors forward for 3 seconds, then brake.
      * @param {number} speed launch speed [0, 100]
      */
-    launch(speed) {
-        // this.leftMotor.forward(speed);
-        // this.rightMotor.forward(speed);
+    async launchAsync(speed) {
+        // Start motors, wait until they reach speed
+        // await Promise.all([
+        //     await this.leftMotor.forwardAsync(speed), 
+        //     await this.rightMotor.forwardAsync(speed)
+        // ]);
 
-        // setTimeout(() => {
-        //     this.leftMotor.brake(1000);
-        //     this.rightMotor.brake(1000);
+        // trigger catapult
+        await this.catapultServo.rotateAsync(this.catapultServo.maxAngle);
 
-        //     setTimeout(() => {
-        //         this.leftMotor.off();
-        //         this.rightMotor.off();
-        //     }, 1100);
-        // }, 3000);
+        // wait a little time to ensure plane launched successfully
+        await this.sleep(2000);
+
+        // Stop motors and reset catapult
+        await Promise.all([
+            // await this.leftMotor.brakeAsync(), 
+            // await this.rightMotor.brakeAsync(),
+            await this.catapultServo.rotateAsync(this.catapultServo.minAngle)
+        ]);
+
+        // switch off catapult
+        await this.catapultServo.offAsync();
+    }
+
+    /**
+     * Sleep for set time
+     * @param {number} timespanMs timespan ms to sleep
+     */
+    async sleep(timespanMs) {
+        return new Promise(resolve => {
+            setTimeout(() => { resolve(); }, timespanMs);
+        });
     }
 }
 

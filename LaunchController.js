@@ -4,37 +4,37 @@ const PiController = require('./PiController');
 class LaunchController {
 
     /**
-     * 
-     * @param {*} io - socket client 
+     * Launch controller listens for commands fom the client, and takes action 
+     * @param {socket.io.Server} server - socket IO server 
      */
-    constructor(io) {
-        this.io = io;
+    constructor(server) {
+        this.server = server;
         this.piController = new PiController();
     }
 
     connect() {
-        const io = this.io.sockets;
+        const sockets = this.server.sockets;
         const piController = this.piController;
 
-        io.on('connection', function (socket) {
+        sockets.on('connection', function (socket) {
             console.log('client connected', { client_id: socket.client.id });
 
-            socket.on('launch', function (data) {
+            socket.on('launch', async (data) => {
                 console.log('launch', { data });
-                io.emit('msg', JSON.stringify(data));
+                sockets.emit('msg', JSON.stringify(data));
 
                 switch (data.action) {
                     case 'takeoff':
                         console.log('[launch] takeoff: ' + data.value);
-                        piController.launch(data.value);
+                        await piController.launchAsync(data.value);
                         break;
                     case 'horizontal':
                         console.log('[launch] horizontal: ' + data.value);
-                        piController.horizontalServo.rotate(data.value);
+                        await piController.horizontalServo.rotateAsync(data.value);
                         break;
                     case 'vertical':
                         console.log('[launch] vertical: ' + data.value);
-                        piController.verticalServo.rotate(data.value);
+                        await piController.verticalServo.rotateAsync(data.value);
                         break;
                     default: break;
                 }

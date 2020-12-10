@@ -19,13 +19,13 @@ class PiController {
         // this.rightMotor = new Motor.Motor(16, 20, 21, true);
 
         //function to run when user closes using ctrl+c
-        process.on('SIGINT', async () => {
-            await this.horizontalServo.offAsync();
-            await this.verticalServo.offAsync();
-            await this.catapultServo.offAsync();
+        //process.on('SIGINT', () => {
+         //   this.horizontalServo.offAsync();
+         //   this.verticalServo.offAsync();
+         //   this.catapultServo.offAsync();
             // await this.leftMotor.offAsync();
             // await this.rightMotor.offAsync();
-        });
+        //});
     }
 
     /**

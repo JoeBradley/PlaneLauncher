@@ -2,37 +2,47 @@
 
 console.log('Environment: ' + process.env.NODE_ENV);
 
+// Setup SSL
+var fs = require('fs');
+var privateKey = fs.readFileSync('/etc/letsencrypt/live/planelauncher.hopto.org/privkey.pem', 'utf8');
+var certificate = fs.readFileSync('/etc/letsencrypt/live/planelauncher.hopto.org/cert.pem', 'utf8');
+var ca = fs.readFileSync('/etc/letsencrypt/live/planelauncher.hopto.org/fullchain.pem', 'utf8');
+var credentials = {key: privateKey, cert: certificate, ca: ca};
+
 /**
  * Module dependencies.
  */
-
 var app = require('../app');
 var debug = require('debug')('planelauncher:server');
 var http = require('http');
+var https = require('https');
+const { prototype } = require('stream');
 
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+var httpsPort = port === 80 ? 443 : 3443;
 
 /**
- * Create HTTP server.
+ * Create HTTP server. List on Port 80
  */
-
 var server = http.createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-
 server.listen(port);
 server.on('error', onError);
-server.on('listening', onListening);
+server.on('listening', () =>  console.log("HTTP server listening on port " + port));
+
+/**
+ * Create HTTPS servre.  Listen on port 443
+ */
+var httpsServer = https.createServer(credentials, app);
+httpsServer.listen(httpsPort);
+httpsServer.on('error', onError);
+httpsServer.on('listening', () =>  console.log("HTTPS server listening on port " + httpsPort));
 
 // Socket IO
-var socket = require('socket.io')(server);
+var socket = require('socket.io')(httpsServer);
 
 //Msg handler 
 var msgHandler = require('../MessageHandler')(socket);
@@ -100,4 +110,5 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  console.log('Listening on ' + bind);
 }

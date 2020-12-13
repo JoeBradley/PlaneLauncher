@@ -73,6 +73,7 @@ input {
 textarea {
   min-width: 320px;
 }
+
 output {
   line-height: 30px;
   border-radius: 4px;
@@ -82,8 +83,13 @@ output {
   background-color: $bg-color-light;
   border-color: $color;
 }
+
 input[type="range"] { 
   padding: 0;
+}
+
+.hidden { 
+  display: none;
 }
 
 .container {

@@ -86,6 +86,10 @@ input[type="range"] {
   padding: 0;
 }
 
+.hidden {
+  display: none;
+}
+
 .container {
   display: -webkit-box;
   display: -ms-flexbox;

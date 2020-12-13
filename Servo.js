@@ -77,20 +77,22 @@ class Servo {
 
             // Resolve once motor pulse width is near target (+/- 20)
             const intTimespan = 50;
-            const maxWait = 250;
+            const maxWait = 300;
             let waited = 0;
 
-            let hdlr = setInterval(() => {
-                waited += intTimespan;
+            setTimeout(() => resolve(), maxWait);
+            
+            // let hdlr = setInterval(() => {
+            //     waited += intTimespan;
 
-                if (waited >= maxWait ||
-                    (this.motor.getServoPulseWidth() >= pulseWidth - 20 &&
-                        this.motor.getServoPulseWidth() <= pulseWidth + 20)) {
-                    clearInterval(hdlr);
-                    console.log('Servo pulse width set', { pulseWidth });
-                    resolve();
-                }
-            }, intTimespan);
+            //     if (waited >= maxWait ||
+            //         (this.motor.getServoPulseWidth() >= pulseWidth - 20 &&
+            //             this.motor.getServoPulseWidth() <= pulseWidth + 20)) {
+            //         clearInterval(hdlr);
+            //         console.log('Servo pulse width set', { pulseWidth });
+            //         resolve();
+            //     }
+            // }, intTimespan);
         });
     };
 }

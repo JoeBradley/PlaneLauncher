@@ -28,6 +28,10 @@ class LaunchController {
                         console.log('[launch] takeoff: ' + data.value);
                         await piController.launchAsync(data.value);
                         break;
+                    case 'catapult':
+                        console.log('[launch] catapult: ' + data.value);
+                        await piController.catapultServo.rotateAsync(data.value);
+                        break;
                     case 'horizontal':
                         console.log('[launch] horizontal: ' + data.value);
                         await piController.horizontalServo.rotateAsync(data.value);

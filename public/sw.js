@@ -1,4 +1,5 @@
-var cacheName = 'planelauncher.v1';
+const version = '1.0.1';
+var cacheName = 'planelauncher.v1.0.1';
 var cacheFiles = [
     '/index.html',
     '/javascripts/scripts.js',

@@ -9,6 +9,7 @@ const launchButton = document.getElementById("launch");
 const speedSlider = document.getElementById("speed");
 const verticalSlider = document.getElementById("vertical");
 const horizontalSlider = document.getElementById("horizontal");
+const catapultSlider = document.getElementById("catapult");
 
 window.addEventListener("load", function () { //when page loads
     msgText.addEventListener("keyup", function (event) {
@@ -22,6 +23,7 @@ window.addEventListener("load", function () { //when page loads
     launchButton.addEventListener("click", () => sendAction('takeoff', +speedSlider.value));
     verticalSlider.addEventListener("change", (event) => sendAction('vertical', +event.target.value));
     horizontalSlider.addEventListener("change", (event) => sendAction('horizontal', +event.target.value));
+    catapultSlider.addEventListener("change", (event) => sendAction('catapult', +event.target.value));
 });
 
 function sendMessage() {

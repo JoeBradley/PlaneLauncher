@@ -13,7 +13,7 @@ class PiController {
     constructor() {
         this.horizontalServo = new Servo(17, -90, 90);
         this.verticalServo = new Servo(27, 0, 90);
-        this.catapultServo = new Servo(22, 0, 30);
+        this.catapultServo = new Servo(22, -45, 20);
 
         // this.leftMotor = new Motor.Motor(14, 15, 18, false);
         // this.rightMotor = new Motor.Motor(16, 20, 21, true);
@@ -49,17 +49,19 @@ class PiController {
      * @param {number} speed launch speed [0, 100]
      */
     async launchAsync(speed) {
-        // Start motors, wait until they reach speed
-        // await Promise.all([
+        // Reset catapult, Start motors, wait until they reach speed
+        await Promise.all([
         //     await this.leftMotor.forwardAsync(speed), 
         //     await this.rightMotor.forwardAsync(speed)
-        // ]);
+            await this.catapultServo.rotateAsync(this.catapultServo.minAngle),
+            await this.sleep(3000)
+        ]);
 
         // trigger catapult
         await this.catapultServo.rotateAsync(this.catapultServo.maxAngle);
 
         // wait a little time to ensure plane launched successfully
-        await this.sleep(2000);
+        await this.sleep(100);
 
         // Stop motors and reset catapult
         await Promise.all([

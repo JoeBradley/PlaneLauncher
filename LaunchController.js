@@ -1,5 +1,3 @@
-const PiController = require('./PiController');
-
 // Socket Message Handler
 class LaunchController {
 
@@ -7,9 +5,9 @@ class LaunchController {
      * Launch controller listens for commands fom the client, and takes action 
      * @param {socket.io.Server} server - socket IO server 
      */
-    constructor(server) {
+    constructor(server, pi) {
         this.server = server;
-        this.piController = new PiController();
+        this.piController = pi;
     }
 
     connect() {

@@ -10,6 +10,7 @@ var debug = require('debug')('planelauncher:server');
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
+const pi = require('../PiController');
 
 // Setup SSL
 var privateKey = fs.readFileSync('/etc/letsencrypt/live/planelauncher.hopto.org/privkey.pem', 'utf8');
@@ -48,7 +49,7 @@ var msgHandler = require('../MessageHandler')(socket);
 msgHandler.connect();
 
 // Launch Controller
-var cntrl = require('../LaunchController')(socket);
+var cntrl = require('../LaunchController')(socket, pi);
 cntrl.connect();
 
 /**

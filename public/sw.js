@@ -1,3 +1,8 @@
+/**
+ * Simple Service Worker, caching static content.
+ * 
+ * version: 2020.12.12 10:57
+ */
 const version = '1.0.1';
 var cacheName = 'planelauncher.v1.0.1';
 var cacheFiles = [

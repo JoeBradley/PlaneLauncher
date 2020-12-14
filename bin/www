@@ -2,28 +2,28 @@
 
 console.log('Environment: ' + process.env.NODE_ENV);
 
-// Setup SSL
-var fs = require('fs');
-var privateKey = fs.readFileSync('/etc/letsencrypt/live/planelauncher.hopto.org/privkey.pem', 'utf8');
-var certificate = fs.readFileSync('/etc/letsencrypt/live/planelauncher.hopto.org/cert.pem', 'utf8');
-var ca = fs.readFileSync('/etc/letsencrypt/live/planelauncher.hopto.org/fullchain.pem', 'utf8');
-var credentials = {key: privateKey, cert: certificate, ca: ca};
-
 /**
  * Module dependencies.
  */
 var app = require('../app');
 var debug = require('debug')('planelauncher:server');
+var fs = require('fs');
 var http = require('http');
 var https = require('https');
-const { prototype } = require('stream');
+const pi = require('../PiController');
+
+// Setup SSL
+var privateKey = fs.readFileSync('/etc/letsencrypt/live/planelauncher.hopto.org/privkey.pem', 'utf8');
+var certificate = fs.readFileSync('/etc/letsencrypt/live/planelauncher.hopto.org/cert.pem', 'utf8');
+var ca = fs.readFileSync('/etc/letsencrypt/live/planelauncher.hopto.org/fullchain.pem', 'utf8');
+var credentials = { key: privateKey, cert: certificate, ca: ca };
 
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '3000');
-var httpsPort = port === 80 ? 443 : 3443;
+var httpsPort = port === 80 ? 443 : (port + 443);
 
 /**
  * Create HTTP server. List on Port 80
@@ -49,13 +49,12 @@ var msgHandler = require('../MessageHandler')(socket);
 msgHandler.connect();
 
 // Launch Controller
-var cntrl = require('../LaunchController')(socket);
+var cntrl = require('../LaunchController')(socket, pi);
 cntrl.connect();
 
 /**
  * Normalize a port into a number, string, or false.
  */
-
 function normalizePort(val) {
   var port = parseInt(val, 10);
 
@@ -75,7 +74,6 @@ function normalizePort(val) {
 /**
  * Event listener for HTTP server "error" event.
  */
-
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
@@ -103,7 +101,6 @@ function onError(error) {
 /**
  * Event listener for HTTP server "listening" event.
  */
-
 function onListening() {
   var addr = server.address();
   var bind = typeof addr === 'string'

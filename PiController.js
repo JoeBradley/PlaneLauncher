@@ -85,4 +85,6 @@ class PiController {
     }
 }
 
-module.exports = PiController;
+const pi = new PiController();
+
+module.exports = pi;

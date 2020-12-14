@@ -7,15 +7,31 @@ const pi = require('./../PiController');
 
 // Create an app instance
 const app = conversation()
- 
+
 // Register handlers for Actions SDK
- 
+
 app.handle('welcome', conv => {
-  conv.add('Welcome to plane launcher');
-  conv.add(new Image({
-    url: 'https://developers.google.com/web/fundamentals/accessibility/semantics-builtin/imgs/160204193356-01-cat-500.jpg',
-    alt: 'A cat',
-  }));
-})
+  console.log('actions.launch', { conv });
+  
+  conv.add('Welcome to Plane Launcher');
+  // conv.add(new Image({
+  //   url: 'https://developers.google.com/web/fundamentals/accessibility/semantics-builtin/imgs/160204193356-01-cat-500.jpg',
+  //   alt: 'A cat',
+  // }));
+});
+
+app.handle('launch', async conv => {
+  try {
+    console.log('actions.launch', { conv });
+
+    await pi.launchAsync(+conv.session.params.speed);
+
+    conv.add('Take-off!');
+  } catch (error) {
+    conv.add('Failed to take-off!');
+  }
+});
+
+
 
 module.exports = app;

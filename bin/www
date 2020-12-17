@@ -10,7 +10,6 @@ var debug = require('debug')('planelauncher:server');
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
-const piController = require('../PiController');
 
 // Setup SSL
 var privateKey = fs.readFileSync('/etc/letsencrypt/live/planelauncher.hopto.org/privkey.pem', 'utf8');

@@ -6,13 +6,13 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var actionsRouter = require('./routes/actions');
 
-const isProduction = process.env.NODE_ENV === "production";
+const cfg = require('./env');
 
 var app = express();
 
 // Redirect to HTTPS (for production mode)
 app.use(function (req, res, next) {
-        if (isProduction) {
+        if (cfg.useSSL) {
                 // Redirect to HTTPS
                 if (req.secure) {
                         // request was via https, so do no special handling
@@ -38,12 +38,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', indexRouter);
+app.post('/api/actions', actionsRouter);
+
 app.use(docserver({
         dir: __dirname + '/public/docs',  // serve Markdown files in the docs directory...
         url: '/'}                  // ...and serve them at the root of the site
       ));
-
-app.use('/', indexRouter);
-app.post('/api/actions', actionsRouter);
 
 module.exports = app;

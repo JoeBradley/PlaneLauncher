@@ -6,7 +6,7 @@ const {
 const pi = require('./../PiController');
 
 // Create an app instance
-const app = conversation()
+const app = conversation();
 
 // Register handlers for Actions SDK
 
@@ -33,7 +33,5 @@ app.handle('launch', async conv => {
     conv.add('Failed to take-off!');
   }
 });
-
-
 
 module.exports = app;

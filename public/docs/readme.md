@@ -40,9 +40,9 @@ As always - I stand on the shoulders of giants - where possible I have linked to
 - 1 Breadboard (makes it easier to make circuit connections)
 - Wires to connect Servos to breadboard/Pi
 
-![Paper Plane Launcher](..\docs\images\plane_launcher_sm.JPG "Paper Plane Launcher")
-![Raspberry Pi setup](..\docs\images\breadboard.JPG "Raspberry Pi board setup")
-![Raspberry Pi schematic](..\docs\images\schematic.JPG "Raspberry Pi schematic")
+![Paper Plane Launcher](..\docs\images\plane_launcher_sm.jpg "Paper Plane Launcher")
+![Raspberry Pi setup](..\docs\images\breadboard.jpg "Raspberry Pi board setup")
+![Raspberry Pi schematic](..\docs\images\schematic.jpg "Raspberry Pi schematic")
 
 ## Raspberry Pi Setup
 Setup your raspberry Pi using the getting started guide: [Setting up your Raspberry Pi](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up)
@@ -70,7 +70,7 @@ To run the application, execute one of the scripts defined in the package.json f
 
 The application is now available at **http://[*raspberry_pi_IP_address*]:3000/index.html**
 
-![Web App](..\docs\images\web_screenshot_1.JPG "Web App")
+![Web App](..\docs\images\web_screenshot_1.jpg "Web App")
 
 ## Add Service to run Web App at startup (optional)
 The web app can be started when the Raspberry Pi starts.  This involve screateing a service which starts the node application.  Run the following from your project folder on the Raspberry PI.

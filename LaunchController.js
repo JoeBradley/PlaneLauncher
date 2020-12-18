@@ -5,9 +5,9 @@ class LaunchController {
      * Launch controller listens for commands fom the client, and takes action 
      * @param {socket.io.Server} server - socket IO server 
      */
-    constructor(server, pi) {
+    constructor(server, piController) {
         this.server = server;
-        this.piController = pi;
+        this.piController = piController;
     }
 
     connect() {
@@ -45,6 +45,6 @@ class LaunchController {
     }
 };
 
-module.exports = function (io) {
-    return new LaunchController(io);
+module.exports = function (io, piController) {
+    return new LaunchController(io, piController);
 };

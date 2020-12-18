@@ -22,9 +22,11 @@ app.handle('welcome', conv => {
 
 app.handle('launch', async conv => {
   try {
-    console.log('actions.launch', { conv });
+    console.log('actions.launch', { 
+      speed: conv.request.session.params.speed
+     });
 
-    await pi.launchAsync(+conv.session.params.speed);
+    await pi.launchAsync(+conv.request.session.params.speed);
 
     conv.add('Take-off!');
   } catch (error) {

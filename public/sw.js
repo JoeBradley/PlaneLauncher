@@ -1,10 +1,10 @@
 /**
  * Simple Service Worker, caching static content.
  * 
- * version: 2020.12.12 10:57
+ * version: 2020.12.18 21:57
  */
-const version = '1.0.5';
-var cacheName = 'planelauncher.v1.0.5';
+const version = '1.0.6';
+var cacheName = 'planelauncher.v1.0.6';
 var cacheFiles = [
     '/index.html',
     '/javascripts/scripts.js',
@@ -20,7 +20,9 @@ var cacheFiles = [
     '/docs/images/actions_screenshot_1.jpg',
     '/docs/images/actions_screenshot_2.jpg',
     '/docs/images/plane_launcher_sm.jpg',
-    '/docs/images/web_screenshot_1.jpg'    
+    '/docs/images/web_screenshot_1.jpg',
+    '/docs/images/schematic.jpg',
+    '/docs/images/breadboard.jpg'    
 ];
 
 self.addEventListener('install', (e) => {

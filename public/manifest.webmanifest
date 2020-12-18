@@ -4,6 +4,12 @@
     "description": "Launch a paper plane fom anywhere in the world",
     "icons": [
       {
+        "src": "/images/paper_plane.png",
+        "type": "image/png",
+        "sizes": "200x200",
+        "purpose": "any"
+      },
+      {
         "src": "/images/icon_192.png",
         "type": "image/png",
         "sizes": "192x192",

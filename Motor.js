@@ -1,7 +1,6 @@
-const Gpio = process.env.NODE_ENV !== "production" ?
-    require("pigpio-mock").Gpio :
-    require("pigpio").Gpio;
-
+const cfg = require('../env');
+const Gpio = cfg.useMock ? require("pigpio-mock").Gpio : require("pigpio").Gpio;
+    
 const MotorDirection = {
     Forward: true,
     Reverse: false,

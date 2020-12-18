@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "export PORT=80 && export NODE_ENV=production && node ./bin/www",
-    "watch": "nodemon ./bin/www"
+    "start": "export NODE_ENV=production && node ./bin/www",
+    "watch": "export USE_SSL=false && nodemon ./bin/www",
+    "pc-start": "set USE_SSL=false && set USE_MOCK=true && node ./bin/www",
+    "pc-watch": "set USE_SSL=false && set USE_MOCK=true && nodemon ./bin/www"
   },
   "dependencies": {
     "@assistant/conversation": "^3.2.0",

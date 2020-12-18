@@ -1,11 +1,9 @@
 #!/usr/bin/env node
-const isProduction = process.env.NODE_ENV === "production";
-
-console.log('Environment: ' + process.env.NODE_ENV);
 
 /**
  * Module dependencies.
  */
+var cfg = require('../env');
 var app = require('../app');
 var debug = require('debug')('planelauncher:server');
 var http = require('http');
@@ -14,34 +12,35 @@ var piController = require('../PiController');
 /**
  * Create HTTP server. List on Port 80
  */
-var port = normalizePort(process.env.PORT || '3000');
 var server = http.createServer(app);
-server.listen(port);
+server.listen(cfg.port);
 server.on('error', onError);
-server.on('listening', () => console.log("HTTP server listening on port " + port));
+server.on('listening', () => console.log("HTTP server listening on port " + cfg.port));
+
+let httpsServer = null;
 
 // In production, use SSL and HTTPS server
-if (isProduction) {
+if (cfg.useSSL) {
   var fs = require('fs');
   var https = require('https');
 
   var privateKey = fs.readFileSync('/etc/letsencrypt/live/planelauncher.hopto.org/privkey.pem', 'utf8');
   var certificate = fs.readFileSync('/etc/letsencrypt/live/planelauncher.hopto.org/cert.pem', 'utf8');
   var ca = fs.readFileSync('/etc/letsencrypt/live/planelauncher.hopto.org/fullchain.pem', 'utf8');
-  var credentials = { key: privateKey, cert: certificate, ca: ca };
+  
+  var credentials = { key: privateKey, cert: certificate, ca };
 
   /**
    * Create HTTPS servre.  Listen on port 443
    */
-  var httpsPort = port === 80 ? 443 : (port + 443);
-  var httpsServer = https.createServer(credentials, app);
-  httpsServer.listen(httpsPort);
+  httpsServer = https.createServer(credentials, app);
+  httpsServer.listen(cfg.httpsPort);
   httpsServer.on('error', onError);
-  httpsServer.on('listening', () => console.log("HTTPS server listening on port " + httpsPort));
+  httpsServer.on('listening', () => console.log("HTTPS server listening on port " + cfg.httpsPort));
 }
 
 // Socket IO (using HTTPS server in production, or HTTP)
-var socket = require('socket.io')(isProduction ? httpsServer : http);
+var socket = require('socket.io')(cfg.useSSL ? httpsServer : server);
 
 //Msg handler 
 var msgHandler = require('../MessageHandler')(socket);
@@ -50,25 +49,6 @@ msgHandler.connect();
 // Launch Controller
 var cntrl = require('../LaunchController')(socket, piController);
 cntrl.connect();
-
-/**
- * Normalize a port into a number, string, or false.
- */
-function normalizePort(val) {
-  var port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
-  return false;
-}
 
 /**
  * Event listener for HTTP server "error" event.
@@ -95,16 +75,4 @@ function onError(error) {
     default:
       throw error;
   }
-}
-
-/**
- * Event listener for HTTP server "listening" event.
- */
-function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
-  console.log('Listening on ' + bind);
 }

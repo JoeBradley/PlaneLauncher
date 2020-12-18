@@ -19,7 +19,7 @@ As always - I stand on the shoulders of giants - where possible I have linked to
 1. [Add Service to run Web App at startup (optional)](#add-service-to-run-web-app-at-startup-optional-)
 1. [Fixed IP Address for Raspberry Pi (optional)](#fixed-ip-address-for-raspberry-pi-optional-)
 1. [Port Forwading (optional)](#port-forwading-optional-)
-1. [Dynmaic DNS for domain (optional)](#dynmaic-dns-for-domain-optional-)
+1. [Dynamic DNS for domain (optional)](#dynamic-dns-for-domain-optional-)
 1. [SSL certificate for Web Server (optional)](#ssl-certificate-for-web-server-optional-)
 1. [Control App using Google Actions (bonus)](#control-app-using-google-actions-bonus-)
 
@@ -40,8 +40,9 @@ As always - I stand on the shoulders of giants - where possible I have linked to
 - 1 Breadboard (makes it easier to make circuit connections)
 - Wires to connect Servos to breadboard/Pi
 
-![Paper Plane Launcher](..\docs\screenshots\plane_launcher_sm.JPG "Paper Plane Launcher")
-
+![Paper Plane Launcher](..\docs\images\plane_launcher_sm.JPG "Paper Plane Launcher")
+![Raspberry Pi setup](..\docs\images\breadboard.JPG "Raspberry Pi board setup")
+![Raspberry Pi schematic](..\docs\images\schematic.JPG "Raspberry Pi schematic")
 
 ## Raspberry Pi Setup
 Setup your raspberry Pi using the getting started guide: [Setting up your Raspberry Pi](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up)
@@ -69,7 +70,7 @@ To run the application, execute one of the scripts defined in the package.json f
 
 The application is now available at **http://[*raspberry_pi_IP_address*]:3000/index.html**
 
-![Web App](..\docs\screenshots\web_screenshot_1.JPG "Web App")
+![Web App](..\docs\images\web_screenshot_1.JPG "Web App")
 
 ## Add Service to run Web App at startup (optional)
 The web app can be started when the Raspberry Pi starts.  This involve screateing a service which starts the node application.  Run the following from your project folder on the Raspberry PI.
@@ -108,19 +109,20 @@ Login to your router (at address like 192.168.1.1, but may be different), and th
 Find out your router IP address by gooogling "What is my IP", like 78.123.3.4.  You can then access you web app from this address (and port used by your web app): http://78.123.3.4:3000/index.html
 
 
-## Dynmaic DNS for domain (optional)
-Your internet provider probably uses Dynamic IP addresses,meaning that your IP address may change from one day to the next.  It is possible to use some online services to setup a static domain name, which connects to your dynamic IP address.  
+## Dynamic DNS for domain (optional)
+Your internet provider probably uses Dynamic IP addresses, meaning that your IP address may change from one day to the next.  It is possible to use some online services to setup a static domain name, which connects to your dynamic IP address.  
 
-In your router look under **Internet** settings, look at DynDNS.  Your router may allow using a number of online providers for Dynamic DNS routing.  They often allow limited free use of these serices.  I have successfully used noip.com for this.
+In your router look under **Internet** settings, look at **DynDNS**.  Your router may allow using a number of online providers for Dynamic DNS routing.  They often allow limited free use of these serices.  I have successfully used [noip.com](https://www.noip.com) for this.
 
 The application is then available at **http://[*dynamic_domain*]:3000/index.html**
 
 ## SSL certificate for Web Server (optional)
 To serve your web application over HTTPS, you will need to install an SSL certificate on the Raspberry Pi.  This can be done using a free certificate, and relatively easily by following the instructions from [Lets Encrypt](https://letsencrypt.org/).  
-(as at 12.2020) Use the [Cert Bot tool](https://certbot.eff.org/) to install.  
+(as at Dec 2020) Use the [Cert Bot tool](https://certbot.eff.org/) to install.  
 - Select Certbot Instructions
-- My HTTP website is running "None of the above" on "Other Linux", 
-- then follow instructions.  
+- My HTTP website is running "None of the above" on "Other Linux"
+- Follow instructions, using the domain you registered in the previous step.  The certificates will be installed on your machine.  
+- Update the **/bin/www** file to load the certificate and private key to be used by your web server.  
 
 The application is then available at **https://[*dynamic_domain*]/index.html**
 
@@ -135,6 +137,6 @@ Google Actions webhook setting: **https://[*dynamic_domain*]/api/actions**
 
 Currently the `/routes/actions.js` handles intents for "welcome" and "launch".
 
-![Actions screenshot](..\docs\screenshots\actions_screenshot_0.JPG "Start screen")
-![Actions screenshot](..\docs\screenshots\actions_screenshot_1.JPG "Start engines")
-![Actions screenshot](..\docs\screenshots\actions_screenshot_2.JPG "Set speed")
+![Actions screenshot](..\docs\images\actions_screenshot_0.JPG "Start screen")
+![Actions screenshot](..\docs\images\actions_screenshot_1.JPG "Start engines")
+![Actions screenshot](..\docs\images\actions_screenshot_2.JPG "Set speed")

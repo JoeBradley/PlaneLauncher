@@ -3,8 +3,8 @@
  * 
  * version: 2020.12.12 10:57
  */
-const version = '1.0.4';
-var cacheName = 'planelauncher.v1.0.4';
+const version = '1.0.5';
+var cacheName = 'planelauncher.v1.0.5';
 var cacheFiles = [
     '/index.html',
     '/javascripts/scripts.js',
@@ -16,11 +16,11 @@ var cacheFiles = [
     '/docs/readme.md',
     '/docs/styles.css',
     '/docs/template.html',
-    '/docs/screenshots/actions_screenshot_0.jpg',
-    '/docs/screenshots/actions_screenshot_1.jpg',
-    '/docs/screenshots/actions_screenshot_2.jpg',
-    '/docs/screenshots/plane_launcher_sm.jpg',
-    '/docs/screenshots/web_screenshot_1.jpg'    
+    '/docs/images/actions_screenshot_0.jpg',
+    '/docs/images/actions_screenshot_1.jpg',
+    '/docs/images/actions_screenshot_2.jpg',
+    '/docs/images/plane_launcher_sm.jpg',
+    '/docs/images/web_screenshot_1.jpg'    
 ];
 
 self.addEventListener('install', (e) => {

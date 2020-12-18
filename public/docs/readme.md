@@ -137,6 +137,6 @@ Google Actions webhook setting: **https://[*dynamic_domain*]/api/actions**
 
 Currently the `/routes/actions.js` handles intents for "welcome" and "launch".
 
-![Actions screenshot](..\docs\images\actions_screenshot_0.JPG "Start screen")
-![Actions screenshot](..\docs\images\actions_screenshot_1.JPG "Start engines")
-![Actions screenshot](..\docs\images\actions_screenshot_2.JPG "Set speed")
+![Actions screenshot](..\docs\images\actions_screenshot_0.jpg "Start screen")
+![Actions screenshot](..\docs\images\actions_screenshot_1.jpg "Start engines")
+![Actions screenshot](..\docs\images\actions_screenshot_2.jpg "Set speed")

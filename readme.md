@@ -40,9 +40,9 @@ As always - I stand on the shoulders of giants - where possible I have linked to
 - 1 Breadboard (makes it easier to make circuit connections)
 - Wires to connect Servos to breadboard/Pi
 
-![Paper Plane Launcher](\images\plane_launcher_sm.JPG "Paper Plane Launcher")
-![Raspberry Pi setup](\images\breadboard.JPG "Start screen")
-![Raspberry Pi schematic](\images\schematic.JPG "Start screen")
+![Paper Plane Launcher](\images\plane_launcher_sm.jpg "Paper Plane Launcher")
+![Raspberry Pi setup](\images\breadboard.jpg "Start screen")
+![Raspberry Pi schematic](\images\schematic.jpg "Start screen")
 
 ## Raspberry Pi Setup
 Setup your raspberry Pi using the getting started guide: [Setting up your Raspberry Pi](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up)
@@ -70,7 +70,7 @@ To run the application, execute one of the scripts defined in the package.json f
 
 The application is now available at **http://[*raspberry_pi_IP_address*]:3000/index.html**
 
-![Web App](\images\web_screenshot_1.JPG "Web App")
+![Web App](\images\web_screenshot_1.jpg "Web App")
 
 ## Add Service to run Web App at startup (optional)
 The web app can be started when the Raspberry Pi starts.  This involve screateing a service which starts the node application.  Run the following from your project folder on the Raspberry PI.
@@ -136,6 +136,6 @@ Google Actions webhook setting: **https://[*dynamic_domain*]/api/actions**
 
 Currently the `/routes/actions.js` handles intents for "welcome" and "launch".
 
-![Actions screenshot](\images\actions_screenshot_0.JPG "Start screen")
-![Actions screenshot](\images\actions_screenshot_1.JPG "Start engines")
-![Actions screenshot](\images\actions_screenshot_2.JPG "Set speed")
+![Actions screenshot](\images\actions_screenshot_0.jpg "Start screen")
+![Actions screenshot](\images\actions_screenshot_1.jpg "Start engines")
+![Actions screenshot](\images\actions_screenshot_2.jpg "Set speed")

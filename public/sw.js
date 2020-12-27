@@ -3,8 +3,8 @@
  * 
  * version: 2020.12.18 21:57
  */
-const version = '1.0.6';
-var cacheName = 'planelauncher.v1.0.6';
+const version = '1.0.8';
+var cacheName = 'planelauncher.v1.0.8';
 var cacheFiles = [
   '/index.html',
   '/javascripts/scripts.js',

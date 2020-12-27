@@ -1,5 +1,6 @@
 const socket = io(); //load socket.io-client and connect to the host that serves the page
 
+const body = document.getElementsByTagName("body")[0];
 const logger = document.getElementById("logs");
 const pilotText = document.getElementById("pilot");
 const msgText = document.getElementById("msg");
@@ -19,12 +20,24 @@ window.addEventListener("load", function () { //when page loads
         }
     });
 
+    window.ononline = updateOnlineStatus;
+    window.onoffline = updateOnlineStatus;
+    updateOnlineStatus();
+
     sendButton.addEventListener("click", sendMessage);
     launchButton.addEventListener("click", () => sendAction('takeoff', +speedSlider.value));
     verticalSlider.addEventListener("change", (event) => sendAction('vertical', +event.target.value));
     horizontalSlider.addEventListener("change", (event) => sendAction('horizontal', +event.target.value));
     catapultSlider.addEventListener("change", (event) => sendAction('catapult', +event.target.value));
 });
+
+function updateOnlineStatus() {
+    var condition = navigator.onLine ? "online" : "offline";
+
+    body.className = condition;
+    
+    console.log('Online status', condition);
+}
 
 function sendMessage() {
     const msg = msgText.value;

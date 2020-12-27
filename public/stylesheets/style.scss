@@ -1,28 +1,36 @@
-$bg-color: #7fffd4;
-$bg-color-95: #7fffd4ed;
-$bg-color-light: #cdeee3;
-$bg-color-disabled: #d0dbd8;
+$bg-color: #2f7586;
+$bg-color-95: #2f7486cb;
+$bg-color-light: #398da1;
+$bg-color-disabled: #97b8c0;
 
-$color: #50ba97;
-$color-dark: #2f9673;
+$color: #FFFFFF;
+$color-dark: #c4d1d4;
 
 html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 body {
-  padding: 10px 30px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: $bg-color-95;
-  background-image: url('/images/paper_plane.png');
-  background-position: center center;
-  background-size: contain;
-  background-blend-mode: lighten;
+  background: url("../images/airport_landscape.jpg") no-repeat center center;
+  background-size: cover;
+  background-blend-mode: darken;
   background-repeat: no-repeat;
 }
 * {
   box-sizing: border-box;
+}
+
+.content {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  padding: 10px 30px;
+  background: linear-gradient(45deg, #3f85b5 0%, rgba(255,255,255,0) 100%);
 }
 
 h1,
@@ -84,11 +92,11 @@ output {
   border-color: $color;
 }
 
-input[type="range"] { 
+input[type="range"] {
   padding: 0;
 }
 
-.hidden { 
+.hidden {
   display: none;
 }
 
@@ -124,7 +132,11 @@ input[type="range"] {
   }
 
   body {
-    padding: 10px;
+    background: url("../images/airport_portrait.jpg") no-repeat center center;
+
+    .content {
+      padding: 10px;
+    }
   }
 
   h1 {
